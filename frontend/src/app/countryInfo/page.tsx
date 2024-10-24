@@ -123,29 +123,35 @@ export default function CountryInfo() {
   };
 
   return (
-    <div className="flex h-screen items-center justify-evenly">
-      <div className="flex flex-col">
-        <h1 className="font-bold my-2">List of Borders</h1>
-        {countryInfo?.borders.map((border) => {
-          return (
-            <span
-              key={border.officialName}
-              className="bg-slate-400 my-2 p-2 rounded-md"
-            >
-              {border.commonName}
-            </span>
-          );
-        })}
+    <div className="flex flex-col h-screen w-screen">
+      <div className="flex justify-center">
+        <h1 className="font-bold text-5xl mt-10">{countryName}</h1>
       </div>
 
-      <div>
-        <h1 className="font-bold">Country's Flag</h1>
-        <img src={countryInfo?.flagUrl} width={200} alt="Country's Flag" />
-      </div>
+      <div className="flex h-screen items-center justify-evenly">
+        <div className="flex flex-col">
+          <h1 className="font-bold my-2">List of Borders</h1>
+          {countryInfo?.borders.map((border) => {
+            return (
+              <span
+                key={border.officialName}
+                className="bg-slate-400 my-2 p-2 rounded-md"
+              >
+                {border.commonName}
+              </span>
+            );
+          })}
+        </div>
 
-      <div className="">
-        <h1 className="font-bold">Population Data Chart</h1>
-        <div className="w-96 h-96 text-white">{LineChart()}</div>
+        <div>
+          <h1 className="font-bold">Country's Flag</h1>
+          <img src={countryInfo?.flagUrl} width={200} alt="Country's Flag" />
+        </div>
+
+        <div className="">
+          <h1 className="font-bold">Population Data Chart</h1>
+          <div className="w-96 h-96 text-white">{LineChart()}</div>
+        </div>
       </div>
     </div>
   );
