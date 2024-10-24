@@ -117,6 +117,17 @@ export class CountriesService {
       }
     });
 
-    return populationData;
+    let values: number[] = [];
+    let years: string[] = [];
+
+    populationData.forEach((data) => {
+      values.push(data.value);
+      years.push(data.year);
+    });
+
+    return {
+      years: years,
+      values: values,
+    };
   }
 }
