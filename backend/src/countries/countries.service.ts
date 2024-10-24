@@ -1,5 +1,6 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { AxiosResponse } from 'axios';
 import { lastValueFrom, map, Observable } from 'rxjs';
 import { CountryInfo } from './dtos/countryInfo.dto';
@@ -43,16 +44,21 @@ export interface BorderResponse {
 
 @Injectable()
 export class CountriesService {
-  constructor(private readonly httpService: HttpService) {}
-  private readonly FLAG_URL =
-    'https://countriesnow.space/api/v0.1/countries/flag/images';
-  private readonly BORDER_URL = 'https://date.nager.at/api/v3/CountryInfo';
+  constructor(
+    private readonly httpService: HttpService,
+    private configService: ConfigService,
+  ) {}
+  private readonly FLAG_URL = this.configService.get<string>('FLAG_URL');
+  private readonly BORDER_URL = this.configService.get<string>('BORDER_URL');
   private readonly POPULATION_URL =
-    'https://countriesnow.space/api/v0.1/countries/population';
+    this.configService.get<string>('POPULATION_URL');
+  private readonly AVAILABLE_COUNTRIES_URL = this.configService.get<string>(
+    'AVAILABLE_COUNTRIES',
+  );
 
   getCountriesAvailable(): Observable<AxiosResponse<CountriesService[]>> {
     return this.httpService
-      .get('https://date.nager.at/api/v3/AvailableCountries')
+      .get(this.AVAILABLE_COUNTRIES_URL)
       .pipe(map((response) => response.data));
   }
 
