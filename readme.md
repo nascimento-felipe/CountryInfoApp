@@ -62,3 +62,11 @@ $ npm run dev
 The frontend is running in the port 3000 and server is running in 3333.
 
 I didn't make the link in each border of a country because my time was running out, so I just did a list of borders
+
+### Project's Landing Page
+
+![](CountryProject.png)
+
+### Country Page
+
+![](CountryExample.png)
