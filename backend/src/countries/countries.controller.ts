@@ -1,19 +1,20 @@
-import {
-  Controller,
-  Get,
-  NotImplementedException,
-  Query,
-} from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
+import { CountriesService } from './countries.service';
 
 @Controller('countries')
 export class CountriesController {
+  constructor(private readonly countriesService: CountriesService) {}
+
   @Get('available')
   getCountriesAvailable() {
-    throw new NotImplementedException();
+    return this.countriesService.getCountriesAvailable();
   }
 
   @Get('country-info')
-  getCountryInfo(@Query('country') country: string) {
-    throw new NotImplementedException();
+  getCountryInfo(
+    @Query('country') country: string,
+    @Query('code') code: string,
+  ) {
+    return this.countriesService.getCountryInfo(country, code);
   }
 }
